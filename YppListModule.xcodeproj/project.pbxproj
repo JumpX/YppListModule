@@ -8,20 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		926FC64C23D0111100579328 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 926FC64B23D0111100579328 /* AppDelegate.m */; };
-		926FC64F23D0111100579328 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 926FC64E23D0111100579328 /* SceneDelegate.m */; };
 		926FC65223D0111100579328 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 926FC65123D0111100579328 /* ViewController.m */; };
 		926FC65523D0111100579328 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 926FC65323D0111100579328 /* Main.storyboard */; };
 		926FC65723D0111300579328 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 926FC65623D0111300579328 /* Assets.xcassets */; };
 		926FC65A23D0111300579328 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 926FC65823D0111300579328 /* LaunchScreen.storyboard */; };
 		926FC65D23D0111300579328 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 926FC65C23D0111300579328 /* main.m */; };
+		926FC66623D0121300579328 /* YppListModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 926FC66523D0121300579328 /* YppListModuleViewController.m */; };
+		926FC66A23D057A900579328 /* AListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 926FC66923D057A900579328 /* AListViewController.m */; };
+		926FC66D23D05D4600579328 /* DemoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 926FC66C23D05D4600579328 /* DemoListViewController.m */; };
+		926FC67023D089CA00579328 /* BView.m in Sources */ = {isa = PBXBuildFile; fileRef = 926FC66F23D089CA00579328 /* BView.m */; };
+		926FC67323D08B7F00579328 /* CView.m in Sources */ = {isa = PBXBuildFile; fileRef = 926FC67223D08B7F00579328 /* CView.m */; };
+		926FC67623D0933B00579328 /* DObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 926FC67523D0933B00579328 /* DObject.m */; };
+		926FC67B23D159C700579328 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 926FC67A23D159C700579328 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		926FC64723D0111100579328 /* YppListModule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YppListModule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926FC64A23D0111100579328 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		926FC64B23D0111100579328 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		926FC64D23D0111100579328 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		926FC64E23D0111100579328 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		926FC65023D0111100579328 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		926FC65123D0111100579328 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		926FC65423D0111100579328 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -29,6 +33,20 @@
 		926FC65923D0111300579328 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		926FC65B23D0111300579328 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		926FC65C23D0111300579328 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		926FC66423D0121300579328 /* YppListModuleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YppListModuleViewController.h; sourceTree = "<group>"; };
+		926FC66523D0121300579328 /* YppListModuleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YppListModuleViewController.m; sourceTree = "<group>"; };
+		926FC66723D013EE00579328 /* YppListModuleProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YppListModuleProtocol.h; sourceTree = "<group>"; };
+		926FC66823D057A900579328 /* AListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AListViewController.h; sourceTree = "<group>"; };
+		926FC66923D057A900579328 /* AListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AListViewController.m; sourceTree = "<group>"; };
+		926FC66B23D05D4600579328 /* DemoListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoListViewController.h; sourceTree = "<group>"; };
+		926FC66C23D05D4600579328 /* DemoListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoListViewController.m; sourceTree = "<group>"; };
+		926FC66E23D089CA00579328 /* BView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BView.h; sourceTree = "<group>"; };
+		926FC66F23D089CA00579328 /* BView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BView.m; sourceTree = "<group>"; };
+		926FC67123D08B7F00579328 /* CView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CView.h; sourceTree = "<group>"; };
+		926FC67223D08B7F00579328 /* CView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CView.m; sourceTree = "<group>"; };
+		926FC67423D0933B00579328 /* DObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DObject.h; sourceTree = "<group>"; };
+		926FC67523D0933B00579328 /* DObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DObject.m; sourceTree = "<group>"; };
+		926FC67A23D159C700579328 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +63,7 @@
 		926FC63E23D0111100579328 = {
 			isa = PBXGroup;
 			children = (
+				926FC67A23D159C700579328 /* Default-568h@2x.png */,
 				926FC64923D0111100579328 /* YppListModule */,
 				926FC64823D0111100579328 /* Products */,
 			);
@@ -61,10 +80,45 @@
 		926FC64923D0111100579328 /* YppListModule */ = {
 			isa = PBXGroup;
 			children = (
+				926FC67823D1599400579328 /* Module */,
+				926FC67723D1598600579328 /* Demo */,
+				926FC67923D159AF00579328 /* Support Files */,
+			);
+			path = YppListModule;
+			sourceTree = "<group>";
+		};
+		926FC67723D1598600579328 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				926FC66B23D05D4600579328 /* DemoListViewController.h */,
+				926FC66C23D05D4600579328 /* DemoListViewController.m */,
+				926FC66823D057A900579328 /* AListViewController.h */,
+				926FC66923D057A900579328 /* AListViewController.m */,
+				926FC66E23D089CA00579328 /* BView.h */,
+				926FC66F23D089CA00579328 /* BView.m */,
+				926FC67123D08B7F00579328 /* CView.h */,
+				926FC67223D08B7F00579328 /* CView.m */,
+				926FC67423D0933B00579328 /* DObject.h */,
+				926FC67523D0933B00579328 /* DObject.m */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
+		};
+		926FC67823D1599400579328 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				926FC66423D0121300579328 /* YppListModuleViewController.h */,
+				926FC66523D0121300579328 /* YppListModuleViewController.m */,
+				926FC66723D013EE00579328 /* YppListModuleProtocol.h */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		926FC67923D159AF00579328 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
 				926FC64A23D0111100579328 /* AppDelegate.h */,
 				926FC64B23D0111100579328 /* AppDelegate.m */,
-				926FC64D23D0111100579328 /* SceneDelegate.h */,
-				926FC64E23D0111100579328 /* SceneDelegate.m */,
 				926FC65023D0111100579328 /* ViewController.h */,
 				926FC65123D0111100579328 /* ViewController.m */,
 				926FC65323D0111100579328 /* Main.storyboard */,
@@ -73,7 +127,7 @@
 				926FC65B23D0111300579328 /* Info.plist */,
 				926FC65C23D0111300579328 /* main.m */,
 			);
-			path = YppListModule;
+			path = "Support Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				926FC65A23D0111300579328 /* LaunchScreen.storyboard in Resources */,
+				926FC67B23D159C700579328 /* Default-568h@2x.png in Resources */,
 				926FC65723D0111300579328 /* Assets.xcassets in Resources */,
 				926FC65523D0111100579328 /* Main.storyboard in Resources */,
 			);
@@ -146,10 +201,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				926FC67323D08B7F00579328 /* CView.m in Sources */,
+				926FC66A23D057A900579328 /* AListViewController.m in Sources */,
 				926FC65223D0111100579328 /* ViewController.m in Sources */,
+				926FC67623D0933B00579328 /* DObject.m in Sources */,
 				926FC64C23D0111100579328 /* AppDelegate.m in Sources */,
+				926FC66623D0121300579328 /* YppListModuleViewController.m in Sources */,
 				926FC65D23D0111300579328 /* main.m in Sources */,
-				926FC64F23D0111100579328 /* SceneDelegate.m in Sources */,
+				926FC66D23D05D4600579328 /* DemoListViewController.m in Sources */,
+				926FC67023D089CA00579328 /* BView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +350,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = YppListModule/Info.plist;
+				INFOPLIST_FILE = "YppListModule/Support Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -306,7 +366,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = YppListModule/Info.plist;
+				INFOPLIST_FILE = "YppListModule/Support Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

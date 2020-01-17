@@ -1,5 +1,5 @@
 //
-//  SceneDelegate.h
+//  CView.h
 //  YppListModule
 //
 //  Created by 徐勉俊 on 2020/1/16.
@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YppListModuleProtocol.h"
 
-@interface SceneDelegate : UIResponder <UIWindowSceneDelegate>
+NS_ASSUME_NONNULL_BEGIN
 
-@property (strong, nonatomic) UIWindow * window;
+@interface CView : UIView<YppListModuleProtocol>
 
 @end
 
+NS_ASSUME_NONNULL_END

@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  BView.h
 //  YppListModule
 //
 //  Created by 徐勉俊 on 2020/1/16.
@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YppListModuleProtocol.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+NS_ASSUME_NONNULL_BEGIN
 
+@interface BView : UIView<YppListModuleProtocol>
 
 @end
 
+NS_ASSUME_NONNULL_END
