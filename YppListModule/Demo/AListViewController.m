@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSArray       *dataList;
 @property (nonatomic, copy)   NSString      *type;
 @property (nonatomic, strong) UIColor       *bgColor;
+@property (nonatomic, assign) CGFloat       rowHeight;
 
 @end
 
@@ -35,6 +36,7 @@
             [list addObject:name];
         }
         _dataList = [list copy];
+        _rowHeight = 60;
     }
     return self;
 }
@@ -42,7 +44,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"%s", __func__);
-//    [self.view addSubview:self.tableView];
     [self.tableView reloadData];
     self.tableView.scrollEnabled = NO;
 }
@@ -91,7 +92,7 @@
 }
 
 - (CGFloat)moduleHeight {
-    return self.dataList.count * 60.0;
+    return self.dataList.count * _rowHeight;
 }
 
 - (NSString *)moduleIdentifier {
@@ -109,7 +110,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60.0;
+    return _rowHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

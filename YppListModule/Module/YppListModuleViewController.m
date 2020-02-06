@@ -106,6 +106,22 @@
     return @"";
 }
 
+- (UIView *)moduleHeader:(id <YppListModuleProtocol>)originModule {
+    id <YppListModuleProtocol> module = [self module:originModule];
+    if (module && [module respondsToSelector:@selector(moduleHeader)]) {
+        return [module moduleHeader];
+    }
+    return [UIView new];
+}
+
+- (CGFloat)moduleHeaderHeight:(id <YppListModuleProtocol>)originModule {
+    id <YppListModuleProtocol> module = [self module:originModule];
+    if (module && [module respondsToSelector:@selector(moduleHeaderHeight)]) {
+        return [module moduleHeaderHeight];
+    }
+    return CGFLOAT_MIN;
+}
+
 - (void)moduleWillAppear:(id <YppListModuleProtocol>)originModule {
     id <YppListModuleProtocol> module = [self module:originModule];
     if (module && [module respondsToSelector:@selector(moduleWillAppear)]) {
@@ -146,6 +162,7 @@
         cell = [[YppListModuleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.contentView.clipsToBounds = YES;
     }
+    
     if (!moduleVC) {
         moduleView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
         cell.displayView = moduleView;
@@ -188,7 +205,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return CGFLOAT_MIN;
+    id <YppListModuleProtocol> module = [self moduleAtIndex:section];
+    return [self moduleHeaderHeight:module];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -196,7 +214,8 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return [UIView new];
+    id <YppListModuleProtocol> module = [self moduleAtIndex:section];
+    return [self moduleHeader:module];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -208,7 +227,7 @@
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-        if (@available(iOS 11.0, *)){
+        if (@available(iOS 11.0, *)) {
             _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         } else {
             [self.view addSubview:[UIView new]]; // 防止UITableViewStyleGrouped奇怪偏移

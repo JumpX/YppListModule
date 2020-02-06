@@ -19,6 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 - (UIViewController *)moduleViewController;
+
+- (UIView *)moduleHeader;
+- (CGFloat)moduleHeaderHeight;
+
 - (void)moduleWillAppear;
 - (void)moduleDidDisappear;
 
