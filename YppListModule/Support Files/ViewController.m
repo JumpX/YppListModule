@@ -18,9 +18,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    btn.frame = CGRectMake(200, 200, 100, 160);
-    [btn setTitle:@"Demo" forState:UIControlStateNormal];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.backgroundColor = [UIColor greenColor];
+    btn.frame = CGRectMake(CGRectGetWidth(self.view.frame)/2.0-120, 200, 240, 120);
+    [btn setTitle:@"列表模块化框架-Demo" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(demoClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
 }

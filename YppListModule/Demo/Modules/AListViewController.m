@@ -8,7 +8,7 @@
 
 #import "AListViewController.h"
 
-@interface AListViewController ()
+@interface AListViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView   *tableView;
 @property (nonatomic, strong) NSArray       *dataList;
@@ -32,7 +32,7 @@
     if (self = [super init]) {
         NSMutableArray *list = [NSMutableArray new];
         for (NSInteger i = 0; i < 13; i ++) {
-            NSString *name = [NSString stringWithFormat:@"列表第%zd行", i];
+            NSString *name = [NSString stringWithFormat:@"列表第%zd行 --点击我改变高度", i];
             [list addObject:name];
         }
         _dataList = [list copy];
@@ -41,9 +41,41 @@
     return self;
 }
 
+- (void)reloadData {
+    UIActivityIndicatorView *test = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleLarge];
+    [test startAnimating];
+    [[UIApplication sharedApplication].windows.lastObject addSubview:test];
+    CGRect bounds = UIScreen.mainScreen.bounds;
+    test.center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [test stopAnimating];
+        [test removeFromSuperview];
+        [self loadData];
+    });
+}
+
+- (void)loadData {
+    NSInteger num = self.dataList.count;
+    num = num == 13 ? 6 : 13;
+    NSMutableArray *temp = [NSMutableArray new];
+    for (NSInteger i = 0; i < num; i ++) {
+        [temp addObject:[NSString stringWithFormat:@"new 第%zd行 --点击我改变高度",i]];
+    }
+    self.dataList = [temp copy];
+    [self.tableView reloadData];
+    
+    // 只刷新height，不会走cellForRowAtIndexPath：
+    [self.moduleListView beginUpdates];
+    [self.moduleListView endUpdates];
+    
+//    [self.moduleListView reloadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"%s", __func__);
+    self.view.backgroundColor = _bgColor;
+    [self.view addSubview:self.tableView];
     [self.tableView reloadData];
     self.tableView.scrollEnabled = NO;
 }
@@ -83,12 +115,8 @@
     NSLog(@"（%@） --> --> %s", NSStringFromClass([self class]), __func__);
 }
 
-- (UIViewController *)moduleViewController {
+- (UIViewController *)moduleDisplayByViewController {
     return self;
-}
-
-- (UIView *)moduleView {
-    return self.tableView;
 }
 
 - (CGFloat)moduleHeight {
@@ -97,6 +125,29 @@
 
 - (NSString *)moduleIdentifier {
     return _type ?: @"ListDefaultType";
+}
+
+- (CGFloat)moduleHeaderHeight {
+    return 50.0;
+}
+
+- (UIView *)moduleHeader {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 50)];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"A -同城    |    直播-   ";
+    return label;
+}
+
+- (NSString *)moduleHeaderIdentifier {
+    return @"A-header";
+}
+
+- (void)moduleHeaderWillAppear {
+    NSLog(@"A-moduleHeaderWillAppear");
+}
+
+- (void)moduleHeaderDidDisappear {
+    NSLog(@"A-moduleHeaderDidDisappear");
 }
 
 #pragma mark - UITableViewDataSource, UITableViewDelegate
@@ -125,12 +176,6 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-}
-
-- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return CGFLOAT_MIN;
 }
@@ -145,6 +190,10 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     return [UIView new];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self reloadData];
 }
 
 #pragma mark - Getter

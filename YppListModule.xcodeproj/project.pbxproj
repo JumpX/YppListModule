@@ -60,6 +60,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9214E87223EC42A10075695E /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				926FC66823D057A900579328 /* AListViewController.h */,
+				926FC66923D057A900579328 /* AListViewController.m */,
+				926FC66E23D089CA00579328 /* BView.h */,
+				926FC66F23D089CA00579328 /* BView.m */,
+				926FC67123D08B7F00579328 /* CView.h */,
+				926FC67223D08B7F00579328 /* CView.m */,
+				926FC67423D0933B00579328 /* DObject.h */,
+				926FC67523D0933B00579328 /* DObject.m */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
 		926FC63E23D0111100579328 = {
 			isa = PBXGroup;
 			children = (
@@ -92,14 +107,7 @@
 			children = (
 				926FC66B23D05D4600579328 /* DemoListViewController.h */,
 				926FC66C23D05D4600579328 /* DemoListViewController.m */,
-				926FC66823D057A900579328 /* AListViewController.h */,
-				926FC66923D057A900579328 /* AListViewController.m */,
-				926FC66E23D089CA00579328 /* BView.h */,
-				926FC66F23D089CA00579328 /* BView.m */,
-				926FC67123D08B7F00579328 /* CView.h */,
-				926FC67223D08B7F00579328 /* CView.m */,
-				926FC67423D0933B00579328 /* DObject.h */,
-				926FC67523D0933B00579328 /* DObject.m */,
+				9214E87223EC42A10075695E /* Modules */,
 			);
 			path = Demo;
 			sourceTree = "<group>";

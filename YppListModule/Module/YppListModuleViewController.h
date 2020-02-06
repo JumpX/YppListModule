@@ -13,18 +13,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YppListModuleViewController : UIViewController
 
-@property (nonatomic, strong) UITableView                   *tableView;
-
-- (NSArray <id <YppListModuleProtocol>> *)moduleList;
-
-- (id <YppListModuleProtocol>)moduleAtIndex:(NSInteger)index;
-- (id <YppListModuleProtocol>)module:(id <YppListModuleProtocol>)module;
-- (UIViewController *)moduleViewController:(id <YppListModuleProtocol>)originModule;
-- (UIView *)moduleView:(id <YppListModuleProtocol>)originModule;
-- (CGFloat)moduleHeight:(id <YppListModuleProtocol>)originModule;
-- (NSString *)moduleIdentifier:(id <YppListModuleProtocol>)originModule;
-- (void)moduleWillAppear:(id <YppListModuleProtocol>)originModule;
-- (void)moduleDidDisappear:(id <YppListModuleProtocol>)originModule;
+/// 列表样式：UITableViewStylePlain可以吸顶悬浮SectionHeader，默认UITableViewStyleGrouped
+@property (nonatomic, assign) UITableViewStyle                      tableStyle;
+/// 模块列表
+@property (nonatomic, strong) UITableView                           *tableView;
+/// 组装模块
+@property (nonatomic, strong) NSArray<id <YppListModuleProtocol>>   *moduleList;
 
 @end
 

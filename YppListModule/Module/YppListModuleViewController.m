@@ -7,10 +7,50 @@
 //
 
 #import "YppListModuleViewController.h"
+#import <objc/runtime.h>
+
+static int _YppModuleListView;
+
+@implementation NSObject (YppListModuleProtocol)
+
+- (void)setModuleListView:(UITableView * _Nullable)moduleListView {
+    objc_setAssociatedObject(self, &_YppModuleListView, moduleListView, OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (UITableView * _Nullable)moduleListView {
+    return objc_getAssociatedObject(self, &_YppModuleListView);
+}
+
+@end
+
+@interface YppListModuleHeader : UITableViewHeaderFooterView
+
+@property (nonatomic, strong) UIView        *displayView;
+
+@end
+
+@implementation YppListModuleHeader
+
+- (void)setDisplayView:(UIView *)displayView {
+    if (_displayView) {
+        [_displayView removeFromSuperview];
+    }
+    if (displayView) {
+        _displayView = displayView;
+        [self.contentView addSubview:displayView];
+        displayView.translatesAutoresizingMaskIntoConstraints = NO;
+        [displayView.topAnchor constraintEqualToAnchor:self.contentView.topAnchor].active = YES;
+        [displayView.leftAnchor constraintEqualToAnchor:self.contentView.leftAnchor].active = YES;
+        [displayView.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor].active = YES;
+        [displayView.rightAnchor constraintEqualToAnchor:self.contentView.rightAnchor].active = YES;
+    }
+}
+
+@end
 
 @interface YppListModuleCell : UITableViewCell
 
-@property (nonatomic, strong) UIView *displayView;
+@property (nonatomic, strong) UIView        *displayView;
 
 @end
 
@@ -19,11 +59,15 @@
 - (void)setDisplayView:(UIView *)displayView {
     if (_displayView) {
         [_displayView removeFromSuperview];
-        _displayView = nil;
     }
     if (displayView) {
         _displayView = displayView;
         [self.contentView addSubview:displayView];
+        displayView.translatesAutoresizingMaskIntoConstraints = NO;
+        [displayView.topAnchor constraintEqualToAnchor:self.contentView.topAnchor].active = YES;
+        [displayView.leftAnchor constraintEqualToAnchor:self.contentView.leftAnchor].active = YES;
+        [displayView.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor].active = YES;
+        [displayView.rightAnchor constraintEqualToAnchor:self.contentView.rightAnchor].active = YES;
     }
 }
 
@@ -31,11 +75,20 @@
 
 @interface YppListModuleViewController ()<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, assign) BOOL                   viewDidAppearIsCalled;
+@property (nonatomic, assign) BOOL      viewDidAppearIsCalled;
 
 @end
 
 @implementation YppListModuleViewController
+
+#pragma mark - Life Cycle
+
+- (instancetype)init {
+    if (self = [super init]) {
+        _tableStyle = UITableViewStyleGrouped;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,13 +103,8 @@
     }
 }
 
-#pragma mark - Override
-
-- (NSArray <id <YppListModuleProtocol>> *)moduleList {
-    return nil;
-}
-
 #pragma mark - Private Methods
+#pragma mark - Private Methods - Module
 
 - (id <YppListModuleProtocol>)moduleAtIndex:(NSInteger)index {
     NSArray *moduleList = [self moduleList];
@@ -76,16 +124,16 @@
 
 - (UIViewController *)moduleViewController:(id <YppListModuleProtocol>)originModule {
     id <YppListModuleProtocol> module = [self module:originModule];
-    if (module && [module respondsToSelector:@selector(modalViewController)]) {
-        return [module moduleViewController];
+    if (module && [module respondsToSelector:@selector(moduleDisplayByViewController)]) {
+        return [module moduleDisplayByViewController];
     }
     return nil;
 }
 
 - (UIView *)moduleView:(id <YppListModuleProtocol>)originModule {
     id <YppListModuleProtocol> module = [self module:originModule];
-    if (module && [module respondsToSelector:@selector(moduleView)]) {
-        return [module moduleView];
+    if (module && [module respondsToSelector:@selector(moduleDisplayByView)]) {
+        return [module moduleDisplayByView];
     }
     return nil;
 }
@@ -106,6 +154,22 @@
     return @"";
 }
 
+- (void)moduleWillAppear:(id <YppListModuleProtocol>)originModule {
+    id <YppListModuleProtocol> module = [self module:originModule];
+    if (module && [module respondsToSelector:@selector(moduleWillAppear)]) {
+        [module moduleWillAppear];
+    }
+}
+
+- (void)moduleDidDisappear:(id <YppListModuleProtocol>)originModule {
+    id <YppListModuleProtocol> module = [self module:originModule];
+    if (module && [module respondsToSelector:@selector(moduleDidDisappear)]) {
+        [module moduleDidDisappear];
+    }
+}
+
+#pragma mark - Private Methods - Module Header
+
 - (UIView *)moduleHeader:(id <YppListModuleProtocol>)originModule {
     id <YppListModuleProtocol> module = [self module:originModule];
     if (module && [module respondsToSelector:@selector(moduleHeader)]) {
@@ -122,17 +186,25 @@
     return CGFLOAT_MIN;
 }
 
-- (void)moduleWillAppear:(id <YppListModuleProtocol>)originModule {
+- (NSString *)moduleHeaderIdentifier:(id <YppListModuleProtocol>)originModule {
     id <YppListModuleProtocol> module = [self module:originModule];
-    if (module && [module respondsToSelector:@selector(moduleWillAppear)]) {
-        [module moduleWillAppear];
+    if (module && [module respondsToSelector:@selector(moduleHeaderIdentifier)]) {
+        return [module moduleHeaderIdentifier];
+    }
+    return @"";
+}
+
+- (void)moduleHeaderWillAppear:(id <YppListModuleProtocol>)originModule {
+    id <YppListModuleProtocol> module = [self module:originModule];
+    if (module && [module respondsToSelector:@selector(moduleHeaderWillAppear)]) {
+        [module moduleHeaderWillAppear];
     }
 }
 
-- (void)moduleDidDisappear:(id <YppListModuleProtocol>)originModule {
+- (void)moduleHeaderDidDisappear:(id <YppListModuleProtocol>)originModule {
     id <YppListModuleProtocol> module = [self module:originModule];
-    if (module && [module respondsToSelector:@selector(moduleDidDisappear)]) {
-        [module moduleDidDisappear];
+    if (module && [module respondsToSelector:@selector(moduleHeaderDidDisappear)]) {
+        [module moduleHeaderDidDisappear];
     }
 }
 
@@ -153,8 +225,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     id <YppListModuleProtocol> module = [self moduleAtIndex:indexPath.section];
+    module.moduleListView = tableView;
     NSString *identifier = [self moduleIdentifier:module];
-    UIView *moduleView = [self moduleView:module];
     UIViewController *moduleVC = [self moduleViewController:module];
     CGFloat height = [self moduleHeight:module];
     YppListModuleCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -164,6 +236,7 @@
     }
     
     if (!moduleVC) {
+        UIView *moduleView = [self moduleView:module];
         moduleView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
         cell.displayView = moduleView;
     }
@@ -175,14 +248,13 @@
     [self moduleWillAppear:module];
     
     UIViewController *moduleVC = [self moduleViewController:module];
-    UIView *moduleView = [self moduleView:module];
     CGFloat height = [self moduleHeight:module];
     if (moduleVC && !moduleVC.parentViewController) {
-        moduleView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
+        moduleVC.view.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
         [moduleVC willMoveToParentViewController:self];
         [self addChildViewController:moduleVC];
         [moduleVC beginAppearanceTransition:YES animated:YES];
-        ((YppListModuleCell *)cell).displayView = moduleView;
+        ((YppListModuleCell *)cell).displayView = moduleVC.view;
         [moduleVC didMoveToParentViewController:self];
         if (self.viewDidAppearIsCalled) {
             [moduleVC endAppearanceTransition];
@@ -215,18 +287,35 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     id <YppListModuleProtocol> module = [self moduleAtIndex:section];
-    return [self moduleHeader:module];
+    NSString *identifier = [self moduleHeaderIdentifier:module];
+    YppListModuleHeader *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:identifier];
+    if (!header) {
+        header = [[YppListModuleHeader alloc] initWithReuseIdentifier:identifier];
+    }
+    UIView *view = [self moduleHeader:module];
+    header.displayView = view;
+    return header;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     return [UIView new];
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    id <YppListModuleProtocol> module = [self moduleAtIndex:section];
+    [self moduleHeaderWillAppear:module];
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section {
+    id <YppListModuleProtocol> module = [self moduleAtIndex:section];
+    [self moduleHeaderDidDisappear:module];
+}
+
 #pragma mark - Getter
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:_tableStyle];
         if (@available(iOS 11.0, *)) {
             _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         } else {

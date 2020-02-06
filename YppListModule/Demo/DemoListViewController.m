@@ -26,8 +26,9 @@
 @implementation DemoListViewController
 
 - (void)viewDidLoad {
+    self.tableStyle = UITableViewStylePlain;
     [super viewDidLoad];
-    self.title = @"DEMO-MODULE";
+    self.title = @"列表模块化框架-Demo";
     CGRect rect = self.view.bounds;
     rect.origin.y = 88;
     rect.size.height -= 88;
