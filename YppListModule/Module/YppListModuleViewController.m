@@ -23,6 +23,15 @@ static int _YppModuleListView;
 
 @end
 
+@implementation YppListModuleTableView
+
+/* 支持多手势触发 */
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(nonnull UIGestureRecognizer *)otherGestureRecognizer {
+    return _tableAllowBothRecognize;
+}
+
+@end
+
 @interface YppListModuleHeader : UITableViewHeaderFooterView
 
 @property (nonatomic, strong) UIView        *displayView;
@@ -75,7 +84,10 @@ static int _YppModuleListView;
 
 @interface YppListModuleViewController ()<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, assign) BOOL      viewDidAppearIsCalled;
+@property (nonatomic, strong) YppListModuleTableView    *tableView;
+
+// first viewDidAppear
+@property (nonatomic, assign) BOOL          viewDidAppearIsCalled;
 
 @end
 
@@ -313,9 +325,9 @@ static int _YppModuleListView;
 
 #pragma mark - Getter
 
-- (UITableView *)tableView {
+- (YppListModuleTableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:_tableStyle];
+        _tableView = [[YppListModuleTableView alloc] initWithFrame:self.view.bounds style:_tableStyle];
         if (@available(iOS 11.0, *)) {
             _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         } else {
